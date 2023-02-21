@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
 
+import {
+    createBrowserRouter, RouterProvider,
+} from "react-router-dom";
+import PrivateGroup from './PrivateGroup';
+import ProtectedGroup from './ProtectedGroup';
+import UserProfile from './UserProfile';
+
+
+const router = createBrowserRouter([
+    {
+        path: '/private-group',
+        element: <ProtectedGroup isMember={false}><PrivateGroup/></ProtectedGroup>
+    }, 
+    {
+        path: '/user/:userId',
+        element: <UserProfile/>
+      },{
+        userId: 1293123
+      },
+])
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    return (
+        <RouterProvider
+            router={router}
+        />
 
+    )
+}
 export default App;
